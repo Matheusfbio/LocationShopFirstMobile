@@ -19,8 +19,9 @@ export default function LoginScreen() {
   const animation = useRef(new Animated.Value(0)).current;
 
   const fadeIn = () => {
-    Animated.spring(animation, {
+    Animated.timing(animation, {
       toValue: show ? 1 : 0,
+      duration: 300,
       useNativeDriver: true,
     }).start();
   };
@@ -41,8 +42,8 @@ export default function LoginScreen() {
           transform: [
             {
               translateY: animation.interpolate({
-                inputRange: [0, 5],
-                outputRange: [30, 100],
+                inputRange: [1, 8],
+                outputRange: [40, 100],
               }),
             },
           ],

@@ -29,3 +29,18 @@ export const CategoryInfo = styled.View`
   background-color: green;
   align-items: center;
 `;
+export const ShowProducts = styled.View`
+  flex-direction: row;
+  background-color: red;
+  margin: 12px 2% 0 2%;
+`;
+export const HeaderInfo = styled.Text`
+  font-size: 18px;
+  color: black;
+`;
+export const ShowCarousel = styled.View`
+  flex-direction: row;
+  padding: 4%;
+  align-items: center;
+  justify-content: space-between;
+`;

@@ -45,8 +45,9 @@ export const LoginButtonGet = styled.View`
 `;
 export const LoginButtonClose = styled.View`
   font-size: 15px;
-  /* background-color: green; */
+  /* background-color: green;rr */
   /* padding: 1px; */
   text-align: center;
   /* border-radius: 12px; */
+  /* margin: 25% 10% -15% -10%; */
 `;
