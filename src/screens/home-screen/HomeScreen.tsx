@@ -8,9 +8,11 @@ import {
   LocationInfo,
   ShowCarousel,
 } from './styles';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+
 import {Avatar, Input, Text} from 'native-base';
 import Carousel from 'react-native-snap-carousel';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 import styled from 'styled-components/native';
 
 const SLIDE_WIDTH = Dimensions.get('screen').width;
@@ -55,7 +57,7 @@ function caroselCardItem({item}: Props) {
   );
 }
 export default function HomeScreen() {
-  const [value, setValue] = useState('');
+  // const [value, setValue] = useState('');
 
   return (
     <SafeAreaView>

@@ -9,7 +9,7 @@ export const MessageSign = styled.View`
   border-radius: 10px;
   border: black solid 2px;
   flex-direction: column;
-  margin: 39.5% 1px -100% 1px;
+  margin: auto;
   padding: 25px 70px 30px 70px;
 `;
 
