@@ -1,11 +1,5 @@
 import React, {useEffect} from 'react';
-import {
-  Animated,
-  SafeAreaView,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Alert, SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
 
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
@@ -17,7 +11,9 @@ import {
   MessageSignInButton,
   MessageSignUpButton,
   MessageText,
+  MessageTextContainer,
 } from './styles';
+import SingIn from '../EmailSignin/SingIn';
 
 GoogleSignin.configure({
   webClientId:
@@ -38,6 +34,17 @@ async function GoogleSignIn() {
   return auth().signInWithCredential(googleCredential);
 }
 
+function SignUpAlert() {
+  Alert.alert('Aviso', 'Esta função não esta disponivel no momento', [
+    {
+      text: 'Cancel',
+      onPress: () => console.log('Cancel Pressed'),
+      style: 'cancel',
+    },
+    {text: 'OK', onPress: () => console.log('OK Pressed')},
+  ]);
+}
+
 export function Message() {
   useEffect(() => {
     const unsub = auth().onAuthStateChanged(user => {
@@ -53,12 +60,12 @@ export function Message() {
   return (
     <SafeAreaView>
       <MessageSign>
-        <MessageText>Signin with</MessageText>
+        <MessageTextContainer>Sign in with</MessageTextContainer>
         <View>
           <TouchableOpacity onPress={() => GoogleSignIn()}>
             <MessageSignInButton>
               <FontAwesome5 name="google" size={25} color="black" />
-              <Text>Sign In with Google</Text>
+              <MessageText>Sign In with Google</MessageText>
             </MessageSignInButton>
           </TouchableOpacity>
         </View>
@@ -71,7 +78,9 @@ export function Message() {
         <View>
           <TouchableOpacity>
             <MessageSignUpButton>
-              <Text>Cadastro</Text>
+              <TouchableOpacity onPress={() => SignUpAlert()}>
+                <MessageText>Cadastro</MessageText>
+              </TouchableOpacity>
             </MessageSignUpButton>
           </TouchableOpacity>
         </View>

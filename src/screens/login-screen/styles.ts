@@ -9,19 +9,19 @@ export const LoginContainer = styled.View`
 `;
 export const LoginComponents = styled.View`
   align-items: center;
-  padding: 30px 35px 15px 35px;
   margin: auto;
   width: 100%;
 `;
 
 export const LoginTitle = styled.Text`
-  font-size: 52px;
+  font-size: 42px;
   margin-bottom: -10px;
+  margin-top: 20%;
   color: white;
 `;
 
 export const LoginText = styled.Text`
-  font-size: 20px;
+  font-size: 15px;
   padding: 15px;
   text-align: center;
   color: white;
@@ -32,4 +32,8 @@ export const LoginImg = styled.View`
   margin: 0 0 10% 0;
   border-radius: 9px;
   background-color: black;
+`;
+
+export const HomeSafeAreaView = styled.SafeAreaView`
+  background-color: white;
 `;

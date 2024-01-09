@@ -1,35 +1,38 @@
 import styled from 'styled-components/native';
 
 export const MessageText = styled.Text`
-  font-size: 17px;
-  margin: 0 12px 12px 0;
+  color: black;
+`;
+
+export const MessageTextContainer = styled.Text`
+  color: white;
+  padding-bottom: 12px;
 `;
 
 export const MessageSign = styled.View`
-  border-radius: 10px;
-  border: black solid 2px;
   flex-direction: column;
+  width: 100%;
   margin: auto;
-  padding: 25px 70px 30px 70px;
+  padding: 20px 70px 30px 70px;
 `;
 
 export const MessageSignInButton = styled.View`
-  border: black 1px solid;
   flex-direction: row;
   padding: 15px 15px 15px 15px;
   align-items: center;
   justify-content: center;
   gap: 10px;
   border-radius: 12px;
+  background-color: white;
 `;
 export const MessageSignUpButton = styled.View`
-  border: black 1px solid;
   flex-direction: row;
   padding: 20px 20px 20px 20px;
   align-items: center;
   justify-content: center;
   gap: 10px;
   border-radius: 12px;
+  background-color: white;
 `;
 
 export const MessageSignDiv = styled.View`

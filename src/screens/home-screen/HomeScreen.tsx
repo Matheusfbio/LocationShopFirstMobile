@@ -1,15 +1,16 @@
-import {Dimensions, Image, SafeAreaView, TouchableOpacity} from 'react-native';
-import React, {useState} from 'react';
+import {Dimensions, Image, TouchableOpacity} from 'react-native';
+import React from 'react';
 import {
   Category,
   CategoryInfo,
   HomeContainer,
   HomeNavBarIcon,
+  HomeSafeAreaView,
   LocationInfo,
   ShowCarousel,
 } from './styles';
 
-import {Avatar, Input, Text} from 'native-base';
+import {Avatar, Input, StatusBar, Text} from 'native-base';
 import Carousel from 'react-native-snap-carousel';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -60,7 +61,8 @@ export default function HomeScreen() {
   // const [value, setValue] = useState('');
 
   return (
-    <SafeAreaView>
+    <HomeSafeAreaView>
+      <StatusBar backgroundColor={'white'} barStyle={'dark-content'} />
       <HomeContainer>
         <Input placeholder="Buscar" w="85%" borderColor="black" margin="1.5" />
         <TouchableOpacity>
@@ -114,76 +116,6 @@ export default function HomeScreen() {
           </Text>
         </CategoryInfo>
       </Category>
-      {/* <ShowProducts>
-        <HeaderInfo>Mais procurados na sua região</HeaderInfo>
-        </ShowProducts>
-      <Category>
-        <CategoryInfo>
-          <Avatar
-            bg="green.500"
-            alignSelf="center"
-            size="xl"
-            textAlign="center"></Avatar>
-          <Text color="black" textAlign="center" size="20">
-            Todas as categorias
-          </Text>
-        </CategoryInfo>
-        <CategoryInfo>
-          <Avatar
-            bg="green.500"
-            alignSelf="center"
-            size="xl"
-            textAlign="center"></Avatar>
-          <Text color="black" textAlign="center" size="20">
-            Todas as categorias
-          </Text>
-        </CategoryInfo>
-        <CategoryInfo>
-          <Avatar
-            bg="green.500"
-            alignSelf="center"
-            size="xl"
-            textAlign="center"></Avatar>
-          <Text color="black" textAlign="center" size="20">
-            Todas as categorias
-          </Text>
-        </CategoryInfo>
-      </Category>
-      <ShowProducts>
-        <HeaderInfo>Mais procurados em Móveis</HeaderInfo>
-      </ShowProducts>
-      <Category>
-        <CategoryInfo>
-          <Avatar
-            bg="green.500"
-            alignSelf="center"
-            size="xl"
-            textAlign="center"></Avatar>
-          <Text color="black" textAlign="center" size="20">
-            Todas as categorias
-          </Text>
-        </CategoryInfo>
-        <CategoryInfo>
-          <Avatar
-            bg="green.500"
-            alignSelf="center"
-            size="xl"
-            textAlign="center"></Avatar>
-          <Text color="black" textAlign="center" size="20">
-            Todas as categorias
-          </Text>
-        </CategoryInfo>
-        <CategoryInfo>
-          <Avatar
-            bg="green.500"
-            alignSelf="center"
-            size="xl"
-            textAlign="center"></Avatar>
-          <Text color="black" textAlign="center" size="20">
-            Todas as categorias
-          </Text>
-        </CategoryInfo>
-      </Category> */}
-    </SafeAreaView>
+    </HomeSafeAreaView>
   );
 }
