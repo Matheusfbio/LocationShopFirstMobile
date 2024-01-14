@@ -1,35 +1,36 @@
-import {Dimensions, Image, TouchableOpacity} from 'react-native';
+import {Dimensions, FlatList, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {
   Category,
   CategoryInfo,
+  ContainerFlatList,
   HomeContainer,
   HomeNavBarIcon,
   HomeSafeAreaView,
   LocationInfo,
   ShowCarousel,
+  ShowFlatList,
+  ShowFlatListText,
 } from './styles';
 
-import {Avatar, Input, StatusBar, Text} from 'native-base';
-import Carousel from 'react-native-snap-carousel';
+import {Avatar, Input, StatusBar, Text, View} from 'native-base';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import styled from 'styled-components/native';
 
 const SLIDE_WIDTH = Dimensions.get('screen').width;
-const ITEM_WIDTH = SLIDE_WIDTH * 1;
+// const ITEM_WIDTH = SLIDE_WIDTH * 1;
 
 const StyledCarousel = styled.View`
   width: ${SLIDE_WIDTH}px;
   border: black 2px;
-  margin: 0 -10% 0 0%;
-  width: 90%;
-  padding: 5%;
-  align-items: center;
+  width: 50%;
+  /* flex-direction: row; */
 `;
 
 interface CarouselItem {
   imgLocal: number;
+  categoryName: string;
 }
 interface Props {
   item: CarouselItem;
@@ -38,28 +39,23 @@ interface Props {
 const carouselItems: CarouselItem[] = [
   {
     imgLocal: require('./img/category_icon.png'),
+    categoryName: 'Todas as categorias',
   },
   {
     imgLocal: require('./img/category_icon.png'),
+    categoryName: 'Moveis',
   },
   {
     imgLocal: require('./img/category_icon.png'),
+    categoryName: 'Automoveis',
   },
   {
     imgLocal: require('./img/category_icon.png'),
+    categoryName: 'Vende & Alugar',
   },
 ];
 
-function caroselCardItem({item}: Props) {
-  return (
-    <StyledCarousel>
-      <Image source={item.imgLocal} />
-    </StyledCarousel>
-  );
-}
 export default function HomeScreen() {
-  // const [value, setValue] = useState('');
-
   return (
     <HomeSafeAreaView>
       <StatusBar backgroundColor={'white'} barStyle={'dark-content'} />
@@ -75,47 +71,20 @@ export default function HomeScreen() {
         <Ionicons name="location-outline" color="black" size={20} />
         <Text color="dark.50">DDD 83 - Paraiba</Text>
       </LocationInfo>
-      <ShowCarousel>
-        <Carousel
+      <ShowFlatList>
+        <FlatList
           data={carouselItems}
-          renderItem={caroselCardItem}
-          sliderWidth={SLIDE_WIDTH}
-          itemWidth={ITEM_WIDTH}
-          useScrollView={true}
+          renderItem={({item}) => (
+            <TouchableOpacity>
+              <ContainerFlatList>
+                <Image source={item.imgLocal} />
+                <ShowFlatListText>{item.categoryName}</ShowFlatListText>
+              </ContainerFlatList>
+            </TouchableOpacity>
+          )}
+          horizontal={true}
         />
-      </ShowCarousel>
-      <Category>
-        <CategoryInfo>
-          <Avatar
-            bg="green.500"
-            alignSelf="center"
-            size="xl"
-            textAlign="center"></Avatar>
-          <Text color="black" textAlign="center" size="20">
-            Todas as categorias
-          </Text>
-        </CategoryInfo>
-        <CategoryInfo>
-          <Avatar
-            bg="green.500"
-            alignSelf="center"
-            size="xl"
-            textAlign="center"></Avatar>
-          <Text color="black" textAlign="center" size="20">
-            Todas as categorias
-          </Text>
-        </CategoryInfo>
-        <CategoryInfo>
-          <Avatar
-            bg="green.500"
-            alignSelf="center"
-            size="xl"
-            textAlign="center"></Avatar>
-          <Text color="black" textAlign="center" size="20">
-            Todas as categorias
-          </Text>
-        </CategoryInfo>
-      </Category>
+      </ShowFlatList>
     </HomeSafeAreaView>
   );
 }

@@ -38,11 +38,21 @@ export const HeaderInfo = styled.Text`
   font-size: 18px;
   color: black;
 `;
-export const ShowCarousel = styled.View`
-  flex-direction: row;
-  padding: 4%;
+export const ContainerFlatList = styled.View`
+  /* background-color: red; */
+  border: 2px solid black;
+  padding: 20px;
+  border-radius: 12px;
+  gap: 12px;
+  margin: 0 10px auto;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+`;
+export const ShowFlatList = styled.View`
+  padding: 4%;
+`;
+export const ShowFlatListText = styled.Text`
+  color: black;
 `;
 export const HomeSafeAreaView = styled.SafeAreaView`
   width: 100%;

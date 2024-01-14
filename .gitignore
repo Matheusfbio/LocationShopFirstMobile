@@ -68,3 +68,4 @@ yarn-error.log
 # files important
 essencial.md
 ConnectDevice.md
+.env
