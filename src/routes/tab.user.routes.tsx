@@ -4,7 +4,6 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import SettingScreen from '../screens/setting-screen/SettingScreen';
 import Entypo from 'react-native-vector-icons/Entypo';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import {View} from 'react-native';
 import AnnounceScreen from '../screens/announce-screen';
 import HomeScreen from '../screens/home-screen';
 import {IconView} from './styles';

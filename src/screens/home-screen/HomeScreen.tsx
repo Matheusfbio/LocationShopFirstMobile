@@ -1,40 +1,31 @@
-import {Dimensions, FlatList, Image, TouchableOpacity} from 'react-native';
+import {FlatList, Image, ScrollView, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {
-  Category,
-  CategoryInfo,
   ContainerFlatList,
+  HeaderText,
   HomeContainer,
   HomeNavBarIcon,
   HomeSafeAreaView,
   LocationInfo,
-  ShowCarousel,
   ShowFlatList,
   ShowFlatListText,
 } from './styles';
 
-import {Avatar, Input, StatusBar, Text, View} from 'native-base';
+import {Input, StatusBar, Text} from 'native-base';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Avatar from '../../Components/avatar/avatar';
 
-import styled from 'styled-components/native';
-
-const SLIDE_WIDTH = Dimensions.get('screen').width;
-// const ITEM_WIDTH = SLIDE_WIDTH * 1;
-
-const StyledCarousel = styled.View`
-  width: ${SLIDE_WIDTH}px;
-  border: black 2px;
-  width: 50%;
-  /* flex-direction: row; */
-`;
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import {NavigationContainer} from '@react-navigation/native';
+import AnnounceScreen from '../announce-screen';
+import SettingScreen from '../setting-screen';
 
 interface CarouselItem {
   imgLocal: number;
   categoryName: string;
 }
-interface Props {
-  item: CarouselItem;
-}
+
+const Tab = createMaterialTopTabNavigator();
 
 const carouselItems: CarouselItem[] = [
   {
@@ -42,15 +33,15 @@ const carouselItems: CarouselItem[] = [
     categoryName: 'Todas as categorias',
   },
   {
-    imgLocal: require('./img/category_icon.png'),
+    imgLocal: require('./img/furniture_icon.png'),
     categoryName: 'Moveis',
   },
   {
-    imgLocal: require('./img/category_icon.png'),
+    imgLocal: require('./img/vehicle_icon.png'),
     categoryName: 'Automoveis',
   },
   {
-    imgLocal: require('./img/category_icon.png'),
+    imgLocal: require('./img/sell_icon.png'),
     categoryName: 'Vende & Alugar',
   },
 ];
@@ -59,32 +50,47 @@ export default function HomeScreen() {
   return (
     <HomeSafeAreaView>
       <StatusBar backgroundColor={'white'} barStyle={'dark-content'} />
+      <HeaderText>Location Shop</HeaderText>
       <HomeContainer>
-        <Input placeholder="Buscar" w="85%" borderColor="black" margin="1.5" />
-        <TouchableOpacity>
-          <HomeNavBarIcon>
-            <Ionicons name="notifications-outline" color="black" size={30} />
-          </HomeNavBarIcon>
-        </TouchableOpacity>
+        <Input
+          placeholder="Buscar"
+          w="85%"
+          borderColor="black"
+          color={'black'}
+          margin="1.5"
+        />
+        <HomeNavBarIcon>
+          <Avatar />
+        </HomeNavBarIcon>
       </HomeContainer>
       <LocationInfo>
         <Ionicons name="location-outline" color="black" size={20} />
         <Text color="dark.50">DDD 83 - Paraiba</Text>
       </LocationInfo>
-      <ShowFlatList>
-        <FlatList
-          data={carouselItems}
-          renderItem={({item}) => (
-            <TouchableOpacity>
-              <ContainerFlatList>
-                <Image source={item.imgLocal} />
-                <ShowFlatListText>{item.categoryName}</ShowFlatListText>
-              </ContainerFlatList>
-            </TouchableOpacity>
-          )}
-          horizontal={true}
-        />
-      </ShowFlatList>
+      <ScrollView>
+        <ShowFlatList>
+          <FlatList
+            data={carouselItems}
+            showsHorizontalScrollIndicator={false}
+            renderItem={({item}) => (
+              <TouchableOpacity>
+                <ContainerFlatList>
+                  <Image source={item.imgLocal} />
+                  <ShowFlatListText>{item.categoryName}</ShowFlatListText>
+                </ContainerFlatList>
+              </TouchableOpacity>
+            )}
+            horizontal={true}
+          />
+        </ShowFlatList>
+        <NavigationContainer independent={true}>
+          <Tab.Navigator initialRouteName="Users">
+            <Tab.Screen name="Users" component={AnnounceScreen} />
+            <Tab.Screen name="Config" component={SettingScreen} />
+            <Tab.Screen name="Home" component={HomeScreen} />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </ScrollView>
     </HomeSafeAreaView>
   );
 }

@@ -39,7 +39,6 @@ export const HeaderInfo = styled.Text`
   color: black;
 `;
 export const ContainerFlatList = styled.View`
-  /* background-color: red; */
   border: 2px solid black;
   padding: 20px;
   border-radius: 12px;
@@ -49,7 +48,7 @@ export const ContainerFlatList = styled.View`
   align-items: center;
 `;
 export const ShowFlatList = styled.View`
-  padding: 4%;
+  margin: 3% auto;
 `;
 export const ShowFlatListText = styled.Text`
   color: black;
@@ -58,4 +57,11 @@ export const HomeSafeAreaView = styled.SafeAreaView`
   width: 100%;
   height: 100%;
   background-color: white;
+`;
+export const HeaderText = styled.Text`
+  width: 100%;
+  color: black;
+  font-size: 25px;
+  text-align: center;
+  margin: 2% auto;
 `;
