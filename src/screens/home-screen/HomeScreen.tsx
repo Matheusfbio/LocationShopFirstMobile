@@ -1,5 +1,13 @@
-import {FlatList, Image, ScrollView, TouchableOpacity} from 'react-native';
-import React from 'react';
+import {
+  FlatList,
+  Image,
+  ScrollView,
+  StatusBar,
+  Text,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
+import React, {createContext, useState} from 'react';
 import {
   ContainerFlatList,
   HeaderText,
@@ -7,19 +15,16 @@ import {
   HomeNavBarIcon,
   HomeSafeAreaView,
   LocationInfo,
+  LocationText,
+  SearchInput,
   ShowFlatList,
   ShowFlatListText,
 } from './styles';
 
-import {Input, StatusBar, Text} from 'native-base';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Avatar from '../../Components/avatar/avatar';
 
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import {NavigationContainer} from '@react-navigation/native';
-import AnnounceScreen from '../announce-screen';
-import SettingScreen from '../setting-screen';
-
 interface CarouselItem {
   imgLocal: number;
   categoryName: string;
@@ -47,25 +52,27 @@ const carouselItems: CarouselItem[] = [
 ];
 
 export default function HomeScreen() {
+  const [search, setSearch] = useState('');
+  const authContext = createContext;
   return (
     <HomeSafeAreaView>
       <StatusBar backgroundColor={'white'} barStyle={'dark-content'} />
       <HeaderText>Location Shop</HeaderText>
       <HomeContainer>
-        <Input
-          placeholder="Buscar"
-          w="85%"
-          borderColor="black"
-          color={'black'}
-          margin="1.5"
-        />
+        <SearchInput>
+          <TextInput
+            value={search}
+            placeholder="Buscar"
+            onChangeText={setSearch}
+          />
+        </SearchInput>
         <HomeNavBarIcon>
           <Avatar />
         </HomeNavBarIcon>
       </HomeContainer>
       <LocationInfo>
         <Ionicons name="location-outline" color="black" size={20} />
-        <Text color="dark.50">DDD 83 - Paraiba</Text>
+        <LocationText>DDD 83 - Paraiba</LocationText>
       </LocationInfo>
       <ScrollView>
         <ShowFlatList>
@@ -83,13 +90,6 @@ export default function HomeScreen() {
             horizontal={true}
           />
         </ShowFlatList>
-        <NavigationContainer independent={true}>
-          <Tab.Navigator initialRouteName="Users">
-            <Tab.Screen name="Users" component={AnnounceScreen} />
-            <Tab.Screen name="Config" component={SettingScreen} />
-            <Tab.Screen name="Home" component={HomeScreen} />
-          </Tab.Navigator>
-        </NavigationContainer>
       </ScrollView>
     </HomeSafeAreaView>
   );

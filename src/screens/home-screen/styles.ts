@@ -12,8 +12,12 @@ export const HomeNavBarIcon = styled.View`
 
 export const LocationInfo = styled.View`
   flex-direction: row;
-  margin: 0 0 0 2%;
+  margin: 0 0 0 0;
+  padding: 5px;
   align-items: center;
+`;
+export const LocationText = styled.Text`
+  color: black;
 `;
 
 export const Category = styled.View`
@@ -48,7 +52,7 @@ export const ContainerFlatList = styled.View`
   align-items: center;
 `;
 export const ShowFlatList = styled.View`
-  margin: 3% auto;
+  margin: 3% 0 0 -1%;
 `;
 export const ShowFlatListText = styled.Text`
   color: black;
@@ -64,4 +68,11 @@ export const HeaderText = styled.Text`
   font-size: 25px;
   text-align: center;
   margin: 2% auto;
+`;
+export const SearchInput = styled.View`
+  width: 85%;
+  margin: 0 1% 0 0;
+  height: 90%;
+  border: 2px;
+  border-radius: 10px;
 `;
