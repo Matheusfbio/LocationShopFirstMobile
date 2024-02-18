@@ -3,11 +3,10 @@ import {
   Image,
   ScrollView,
   StatusBar,
-  Text,
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import React, {createContext, useState} from 'react';
+import React, {useState} from 'react';
 import {
   ContainerFlatList,
   HeaderText,
@@ -24,13 +23,10 @@ import {
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Avatar from '../../Components/avatar/avatar';
 
-import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 interface CarouselItem {
   imgLocal: number;
   categoryName: string;
 }
-
-const Tab = createMaterialTopTabNavigator();
 
 const carouselItems: CarouselItem[] = [
   {
@@ -53,7 +49,6 @@ const carouselItems: CarouselItem[] = [
 
 export default function HomeScreen() {
   const [search, setSearch] = useState('');
-  const authContext = createContext;
   return (
     <HomeSafeAreaView>
       <StatusBar backgroundColor={'white'} barStyle={'dark-content'} />

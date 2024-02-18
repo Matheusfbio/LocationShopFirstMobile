@@ -1,12 +1,33 @@
 import styled from 'styled-components/native';
 
-export const TaskText = styled.Text`
-  align-self: center;
-  text-align: center;
-  font-size: 22px;
-  margin: 0 25% 0 40%;
-  /* background-color: black; */
+export const AnnounceSafeAreaView = styled.SafeAreaView`
+  width: 100%;
+  height: 100%;
+  background-color: white;
 `;
+
+export const HeaderText = styled.Text`
+  width: 100%;
+  color: black;
+  font-size: 25px;
+  text-align: center;
+  margin: 2% auto;
+`;
+
+export const FormInput = styled.View`
+  margin: 0% 3.5%;
+  width: 92%;
+  height: 15%;
+  border: 2px;
+  border-radius: 10px;
+  background-color: red;
+`;
+export const FormField = styled.View`
+  gap: 12px;
+  padding-top: 12px;
+  flex-direction: column;
+`;
+
 export const TaskNavBar = styled.View`
   flex-direction: row;
   /* background-color: black; */
