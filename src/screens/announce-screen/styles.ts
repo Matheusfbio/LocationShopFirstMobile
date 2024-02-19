@@ -15,22 +15,32 @@ export const HeaderText = styled.Text`
 `;
 
 export const FormInput = styled.View`
-  margin: 0% 3.5%;
-  width: 92%;
-  height: 15%;
+  margin: 0% 4.5%;
   border: 2px;
   border-radius: 10px;
-  background-color: red;
 `;
 export const FormField = styled.View`
-  gap: 12px;
-  padding-top: 12px;
-  flex-direction: column;
+  gap: 15px;
+  padding: 1px;
+`;
+
+export const ButtonSubmit = styled.TouchableOpacity`
+  margin: auto;
+  border: 3px;
+  padding: 15px;
+  border-radius: 10px;
+  margin: 0% 4.5%;
+  background-color: #020083;
+`;
+
+export const ButtonText = styled.Text`
+  color: white;
+  text-align: center;
+  font-size: 15px;
 `;
 
 export const TaskNavBar = styled.View`
   flex-direction: row;
-  /* background-color: black; */
 `;
 
 export const TaskContent = styled.Text`
