@@ -1,8 +1,9 @@
 import React, {useEffect} from 'react';
+import config from '../../../config/configEnv';
 import {
-  Animated,
   SafeAreaView,
   Text,
+  ToastAndroid,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -17,11 +18,11 @@ import {
   MessageSignInButton,
   MessageSignUpButton,
   MessageText,
+  MessageTextContainer,
 } from './styles';
 
 GoogleSignin.configure({
-  webClientId:
-    '670820340972-qabul3ru603lu1kv8eits58qu842spc6.apps.googleusercontent.com',
+  webClientId: config.WEB_CLIENT_ID,
   offlineAccess: true,
 });
 
@@ -38,6 +39,10 @@ async function GoogleSignIn() {
   return auth().signInWithCredential(googleCredential);
 }
 
+const showToastWithGravity = () => {
+  ToastAndroid.show('Não esta disponivel', 2);
+};
+
 export function Message() {
   useEffect(() => {
     const unsub = auth().onAuthStateChanged(user => {
@@ -53,12 +58,12 @@ export function Message() {
   return (
     <SafeAreaView>
       <MessageSign>
-        <MessageText>Signin with</MessageText>
+        <MessageTextContainer>Sign in with</MessageTextContainer>
         <View>
           <TouchableOpacity onPress={() => GoogleSignIn()}>
             <MessageSignInButton>
               <FontAwesome5 name="google" size={25} color="black" />
-              <Text>Sign In with Google</Text>
+              <MessageText>Sign In with Google</MessageText>
             </MessageSignInButton>
           </TouchableOpacity>
         </View>
@@ -70,9 +75,11 @@ export function Message() {
         <View />
         <View>
           <TouchableOpacity>
-            <MessageSignUpButton>
-              <Text>Cadastro</Text>
-            </MessageSignUpButton>
+            <TouchableOpacity onPress={() => showToastWithGravity()}>
+              <MessageSignUpButton>
+                <MessageText>Cadastro</MessageText>
+              </MessageSignUpButton>
+            </TouchableOpacity>
           </TouchableOpacity>
         </View>
       </MessageSign>

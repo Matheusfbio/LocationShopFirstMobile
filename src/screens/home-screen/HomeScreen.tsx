@@ -1,63 +1,91 @@
-import {SafeAreaView, TouchableOpacity} from 'react-native';
+import {
+  FlatList,
+  Image,
+  ScrollView,
+  StatusBar,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
 import React, {useState} from 'react';
 import {
-  Category,
-  CategoryInfo,
+  ContainerFlatList,
+  HeaderText,
   HomeContainer,
   HomeNavBarIcon,
+  HomeSafeAreaView,
   LocationInfo,
+  LocationText,
+  SearchInput,
+  ShowFlatList,
+  ShowFlatListText,
 } from './styles';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import {Avatar, Input, Text} from 'native-base';
-export default function HomeScreen() {
-  const [value, setValue] = useState('');
 
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Avatar from '../../Components/avatar/avatar';
+
+interface CarouselItem {
+  imgLocal: number;
+  categoryName: string;
+}
+
+const carouselItems: CarouselItem[] = [
+  {
+    imgLocal: require('./img/category_icon.png'),
+    categoryName: 'Todas as categorias',
+  },
+  {
+    imgLocal: require('./img/furniture_icon.png'),
+    categoryName: 'Moveis',
+  },
+  {
+    imgLocal: require('./img/vehicle_icon.png'),
+    categoryName: 'Automoveis',
+  },
+  {
+    imgLocal: require('./img/sell_icon.png'),
+    categoryName: 'Vende & Alugar',
+  },
+];
+
+export default function HomeScreen() {
+  const [search, setSearch] = useState('');
   return (
-    <SafeAreaView>
+    <HomeSafeAreaView>
+      <StatusBar backgroundColor={'white'} barStyle={'dark-content'} />
+      <HeaderText>Location Shop</HeaderText>
       <HomeContainer>
-        <Input placeholder="Buscar" w="85%" borderColor="black" margin="1.5" />
-        <TouchableOpacity>
-          <HomeNavBarIcon>
-            <Ionicons name="notifications-outline" color="black" size={30} />
-          </HomeNavBarIcon>
-        </TouchableOpacity>
+        <SearchInput>
+          <TextInput
+            value={search}
+            placeholder="Buscar"
+            onChangeText={setSearch}
+          />
+        </SearchInput>
+        <HomeNavBarIcon>
+          <Avatar />
+        </HomeNavBarIcon>
       </HomeContainer>
       <LocationInfo>
         <Ionicons name="location-outline" color="black" size={20} />
-        <Text color="dark.50">DDD 83 - Paraiba</Text>
+        <LocationText>DDD 83 - Paraiba</LocationText>
       </LocationInfo>
-      <Category>
-        <CategoryInfo>
-          <Avatar
-            bg="green.500"
-            alignSelf="center"
-            size="xl"
-            textAlign="center"></Avatar>
-          <Text color="black" textAlign="center" size="20">
-            Todas as categorias
-          </Text>
-        </CategoryInfo>
-        <CategoryInfo>
-          <Avatar
-            bg="green.500"
-            alignSelf="center"
-            size="xl"
-            textAlign="center"></Avatar>
-          <Text color="black" textAlign="center" size="20">
-            Todas as categorias
-          </Text>
-        </CategoryInfo>
-        <CategoryInfo>
-          <Avatar
-            bg="green.500"
-            alignSelf="center"
-            size="xl"
-            textAlign="center"></Avatar>
-          <Text color="black" textAlign="center" size="20">
-            Todas as categorias
-          </Text>
-        </CategoryInfo>
-      </Category>
-    </SafeAreaView>
+      <ScrollView>
+        <ShowFlatList>
+          <FlatList
+            data={carouselItems}
+            showsHorizontalScrollIndicator={false}
+            renderItem={({item}) => (
+              <TouchableOpacity>
+                <ContainerFlatList>
+                  <Image source={item.imgLocal} />
+                  <ShowFlatListText>{item.categoryName}</ShowFlatListText>
+                </ContainerFlatList>
+              </TouchableOpacity>
+            )}
+            horizontal={true}
+          />
+        </ShowFlatList>
+      </ScrollView>
+    </HomeSafeAreaView>
   );
 }

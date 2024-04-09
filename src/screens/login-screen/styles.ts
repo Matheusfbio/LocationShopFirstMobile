@@ -9,20 +9,22 @@ export const LoginContainer = styled.View`
 `;
 export const LoginComponents = styled.View`
   align-items: center;
-  padding: 30px 35px 15px 35px;
-  margin: -20% 0 15% 0;
+  margin: auto;
   width: 100%;
 `;
 
 export const LoginTitle = styled.Text`
-  font-size: 32px;
+  font-size: 42px;
   margin-bottom: -10px;
+  margin-top: 20%;
+  color: white;
 `;
 
 export const LoginText = styled.Text`
   font-size: 15px;
   padding: 15px;
   text-align: center;
+  color: white;
 `;
 
 export const LoginImg = styled.View`
@@ -31,22 +33,7 @@ export const LoginImg = styled.View`
   border-radius: 9px;
   background-color: black;
 `;
-export const LoginAnimation = styled.View`
-  margin: -22% -100% -42% -100%;
-  flex-direction: column;
-`;
 
-export const LoginButtonGet = styled.View`
-  font-size: 15px;
-  /* padding: 2px 80px 2px 82px; */
-  text-align: center;
-  /* background-color: blue; */
-  margin: 25% -10% -15% -10%;
-`;
-export const LoginButtonClose = styled.View`
-  font-size: 15px;
-  /* background-color: green; */
-  /* padding: 1px; */
-  text-align: center;
-  /* border-radius: 12px; */
+export const HomeSafeAreaView = styled.SafeAreaView`
+  background-color: white;
 `;
