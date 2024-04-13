@@ -9,18 +9,20 @@ import {
   ButtonText,
 } from './styles';
 import {KeyboardAvoidingView, Text, TextInput, View} from 'react-native';
-
 import {TOKEN_ID} from '@env';
+
 interface DataItem {
-  id: number;
-  attributes: {
-    description: string;
-    title: string;
-    createdAt: string;
-    updatedAt: string;
-    publishedAt: string;
-    locale: string;
-    price: number | null;
+  data: {
+    id: any | '';
+    attributes: {
+      title: string;
+      description: string;
+      price: number | '';
+      // createdAt: string;
+      // updatedAt: string;
+      // publishedAt: string;
+      // locale: string;
+    };
   };
 }
 
@@ -30,25 +32,62 @@ export default function AnnounceScreen() {
   const [price, setPrice] = useState<DataItem | any>();
 
   //Save data of api strapi
-  const [data, setData] = useState<DataItem[]>([]);
+  const [data, setData] = useState<DataItem[] | ''>([]);
 
   const url = 'http://192.168.0.107:1337';
 
   const HandleRegister = async () => {
-    const AnnounceData = {
-      data: [
-        {
-          // id: null, // Como este é um novo item, o ID pode ser null
+    try {
+      // Definir os dados a serem enviados
+      const announceData: DataItem = {
+        data: {
           attributes: {
             title: title,
             description: description,
             price: price,
           },
+          id: '',
         },
-      ],
-    };
+      };
 
-    console.log('Dados a serem enviados:', JSON.stringify(AnnounceData));
+      // Fazer a requisição usando a Fetch API
+      function response(url: any, {arg}: any) {
+        return fetch(`${url}/api/products`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json', // Indicar que o corpo da requisição é um JSON
+            // Se necessário, adicione token de autorização
+            // 'Authorization': `Bearer ${TOKEN_ID}`
+          },
+          body: JSON.stringify({data: {...arg}}), // Converter o objeto JavaScript para uma string JSON
+        });
+      }
+      // const response = await fetch(`${url}/api/products`, {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json', // Indicar que o corpo da requisição é um JSON
+      //     // Se necessário, adicione token de autorização
+      //     // 'Authorization': `Bearer ${TOKEN_ID}`
+      //   },
+      //   body: JSON.stringify({...announceData}), // Converter o objeto JavaScript para uma string JSON
+      // });
+
+      // if (!response.ok) {
+      //   const errorMessage = await response.text(); // Extrair mensagem de erro do corpo da resposta
+      //   console.error(
+      //     'Erro ao cadastrar os dados:',
+      //     response.status,
+      //     errorMessage,
+      //   );
+      //   return; // Encerrar a execução da função se a resposta não for OK
+      // }
+      console.log('Dados cadastrados com sucesso:', data);
+      setData(data);
+      // Realizar qualquer ação adicional necessária após o cadastro bem-sucedido
+    } catch (error) {
+      console.error('Erro ao processar a requisição:', error);
+      // Tratar outros erros, se necessário
+    }
   };
 
   const handleInputChange = (text: any) => {
@@ -60,33 +99,6 @@ export default function AnnounceScreen() {
   useEffect(() => {
     // fetchData();
   }, []);
-
-  // Configurar as opções da requisição
-  const options = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json', // Indicar que o corpo da requisição é um JSON
-      // Authorization: 'Bearer' + TOKEN_ID, // Adicionar token de autorização se necessário
-    },
-    body: JSON.stringify(data), // Converter o objeto JavaScript para uma string JSON
-  };
-
-  // Fazer a requisição usando a Fetch API
-  fetch(`${url}/api/products`, options)
-    .then(response => {
-      if (response.ok) {
-        throw new Error('Falha ao cadastrar os dados');
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log('Dados cadastrados com sucesso:', data);
-      // Realizar qualquer ação adicional necessária após o cadastro bem-sucedido
-    })
-    .catch(error => {
-      console.error('Erro ao cadastrar os dados:', error);
-      // Tratar erros de requisição, se necessário
-    });
 
   // Call the data of Api
   // const fetchData = async () => {
