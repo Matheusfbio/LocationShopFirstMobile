@@ -8,7 +8,7 @@ export default function SettingScreen() {
   return (
     <SettingsSafeAreaView>
       <SettingsText>Profile</SettingsText>
-      <Avatar />
+      {/* <Avatar /> */}
       <GoogleSignOut />
     </SettingsSafeAreaView>
   );

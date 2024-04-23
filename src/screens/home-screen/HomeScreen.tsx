@@ -45,6 +45,10 @@ const carouselItems: CarouselItem[] = [
     imgLocal: require('./img/sell_icon.png'),
     categoryName: 'Vende & Alugar',
   },
+  {
+    imgLocal: require('./img/smartphone_icon.png'),
+    categoryName: 'Smartphone',
+  },
 ];
 
 export default function HomeScreen() {

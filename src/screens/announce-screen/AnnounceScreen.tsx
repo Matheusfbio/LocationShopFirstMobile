@@ -8,6 +8,7 @@ import {
   ButtonSubmit,
   ButtonText,
 } from './styles';
+import auth from '@react-native-firebase/auth';
 import {KeyboardAvoidingView, TextInput} from 'react-native';
 
 export default function AnnounceScreen() {
@@ -17,10 +18,21 @@ export default function AnnounceScreen() {
 
   const HandleRegister = async () => {
     try {
-      const produto = {
+      // Verifica se existe um usuário autenticado
+      const user = auth().currentUser;
+      if (!user) {
+        throw new Error('Usuário não autenticado');
+      }
+
+      // Obtém o UID do usuário autenticado
+      const uid = user.uid;
+
+      // Cria o objeto do produto com o UID do usuário
+      const product = {
         nameProduct,
         description,
         price,
+        idUser: uid, // Use diretamente o UID obtido
       };
 
       const response = await fetch('http://192.168.0.107:8080/products', {
@@ -28,7 +40,7 @@ export default function AnnounceScreen() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(produto),
+        body: JSON.stringify(product),
       });
 
       if (!response.ok) {
@@ -47,10 +59,6 @@ export default function AnnounceScreen() {
     const numericValue = text.replace(/[^0-9]/g, '');
     setPrice(numericValue);
   };
-
-  // useEffect(() => {
-  //   // fetchData();
-  // }, []);
 
   // Call the data of Api
   // const fetchData = async () => {

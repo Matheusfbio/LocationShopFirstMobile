@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Text, TouchableOpacity, View} from 'react-native';
+import {Text, TouchableOpacity} from 'react-native';
 
 import auth from '@react-native-firebase/auth';
 import {SignOutButton} from './styles';
