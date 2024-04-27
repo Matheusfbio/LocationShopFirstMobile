@@ -7,7 +7,7 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start --reset-cache",
-    "test": "jest --watchAll"
+    "test": "jest --config jest.config.js --watchAll"
   },
   "dependencies": {
     "@react-native-firebase/app": "^18.5.0",
@@ -20,7 +20,6 @@
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
     "@react-navigation/stack": "^6.3.17",
-    "@reduxjs/toolkit": "^1.9.6",
     "@types/react-native-dotenv": "^0.2.2",
     "@types/react-native-vector-icons": "^6.4.18",
     "deprecated-react-native-prop-types": "^5.0.0",
@@ -47,6 +46,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.24.1",
     "@babel/preset-env": "^7.20.0",
     "@babel/preset-typescript": "^7.23.3",
     "@babel/runtime": "^7.20.0",
@@ -57,7 +57,7 @@
     "@testing-library/react": "^14.1.2",
     "@testing-library/react-native": "^12.4.1",
     "@tsconfig/react-native": "^3.0.0",
-    "@types/jest": "^29.5.11",
+    "@types/jest": "^29.5.12",
     "@types/react": "^18.0.24",
     "@types/react-test-renderer": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^6.4.0",
@@ -73,7 +73,7 @@
     "metro-react-native-babel-preset": "0.76.8",
     "prettier": "^2.4.1",
     "react-test-renderer": "18.2.0",
-    "ts-jest": "^29.1.1",
+    "ts-jest": "^29.1.2",
     "typescript": "*"
   },
   "engines": {
