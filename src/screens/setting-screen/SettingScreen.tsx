@@ -3,15 +3,14 @@ import GoogleSignOut from '../../Components/GoogleSignIn/GoogleSignOut';
 import {SettingsSafeAreaView, SettingsText} from './styles';
 import Avatar from '../../Components/avatar/avatar';
 import {Text} from 'react-native';
-import SmartFoneScreen from '../smartfone-screen/Smartfone';
+import SmartFoneScreen from '../smartfone-screen/SmartphoneScreen';
 
 export default function SettingScreen() {
   return (
-    <SmartFoneScreen />
-    // <SettingsSafeAreaView>
-    //   <SettingsText>Profile</SettingsText>
-    //   {/* <Avatar /> */}
-    //   {/* <GoogleSignOut /> */}
-    // </SettingsSafeAreaView>
+    <SettingsSafeAreaView>
+      <SettingsText>Profile</SettingsText>
+      <Avatar />
+      <GoogleSignOut />
+    </SettingsSafeAreaView>
   );
 }

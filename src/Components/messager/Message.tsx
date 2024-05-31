@@ -15,10 +15,10 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {
   MessageSign,
   MessageSignDiv,
-  MessageSignInButton,
-  MessageSignUpButton,
   MessageText,
-  MessageTextContainer,
+  SignInButton,
+  SignUpButton,
+  TextContainer,
 } from './styles';
 
 GoogleSignin.configure({
@@ -58,13 +58,13 @@ export function Message() {
   return (
     <SafeAreaView>
       <MessageSign>
-        <MessageTextContainer>Sign in with</MessageTextContainer>
+        <TextContainer>Sign in with</TextContainer>
         <View>
           <TouchableOpacity onPress={() => GoogleSignIn()}>
-            <MessageSignInButton>
+            <SignInButton>
               <FontAwesome5 name="google" size={25} color="black" />
               <MessageText>Sign In with Google</MessageText>
-            </MessageSignInButton>
+            </SignInButton>
           </TouchableOpacity>
         </View>
         <MessageSignDiv>
@@ -76,9 +76,9 @@ export function Message() {
         <View>
           <TouchableOpacity>
             <TouchableOpacity onPress={() => showToastWithGravity()}>
-              <MessageSignUpButton>
+              <SignUpButton>
                 <MessageText>Cadastro</MessageText>
-              </MessageSignUpButton>
+              </SignUpButton>
             </TouchableOpacity>
           </TouchableOpacity>
         </View>

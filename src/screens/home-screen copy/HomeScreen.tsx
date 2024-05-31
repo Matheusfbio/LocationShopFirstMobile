@@ -1,6 +1,5 @@
 import {
   FlatList,
-  FlatListComponent,
   Image,
   ScrollView,
   StatusBar,
@@ -54,7 +53,6 @@ export default function HomeScreen() {
         <ShowFlatList>
           <TouchableOpacity onPress={() => navigation.navigate('Smartphones')}>
             <ContainerFlatList>
-              <Image source={require('./img/smartphone_icon.png')} />
               <ShowFlatListText>Smartfone</ShowFlatListText>
             </ContainerFlatList>
           </TouchableOpacity>

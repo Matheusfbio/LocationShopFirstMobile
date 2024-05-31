@@ -1,14 +1,28 @@
-// import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// import {
+//   createNativeStackNavigator,
+//   NativeStackNavigationProp,
+// } from '@react-navigation/native-stack';
 // import React from 'react';
-// import TaskScreen from '../screens/tasks-screen';
-// import { TaskCrud } from '../screens/tasks-screen/TaskCrud';
+// import {NavigationContainer} from '@react-navigation/native';
+// import SmartFoneScreen from '../screens/smartfone-screen/SmartfoneScreen';
+// import HomeScreen from '../screens/home-screen';
+
+// type StackNavigation = {
+//   HomeScreen: undefined;
+//   Smartphone: undefined;
+// };
+
 // const Stack = createNativeStackNavigator();
-// const { Screen, Navigator } = createNativeStackNavigator();
+
+// export type StackTypes = NativeStackNavigationProp<StackNavigation>;
 
 // export default function StackRoutes() {
 //   return (
-//     <Stack.Navigator screenOptions={{ headerShown: false }}>
-//       <Stack.Screen name="TaskCrud" component={TaskCrud} />
-//     </Stack.Navigator>
+//     <NavigationContainer independent={true}>
+//       <Stack.Navigator initialRouteName="Home">
+//         <Stack.Screen name="Home" component={HomeScreen} />
+//         <Stack.Screen name="Smartphone" component={SmartFoneScreen} />
+//       </Stack.Navigator>
+//     </NavigationContainer>
 //   );
 // }

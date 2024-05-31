@@ -1,5 +1,5 @@
-import {SmartFoneSafeAreaView} from './styles';
-import {Text, View} from 'react-native';
+import {Container, SmartFoneSafeAreaView} from './styles';
+import {Text, TextComponent, View} from 'react-native';
 import {useEffect, useState} from 'react';
 
 interface SmartFone {
@@ -10,12 +10,12 @@ interface SmartFone {
   username: string;
 }
 
-export default function SmartFoneScreen() {
+export default function SmartPhoneScreen() {
   const [data, setData] = useState<SmartFone[]>([]);
 
   useEffect(() => {
     fetchData();
-    const interval = setInterval(fetchData, 10000); // Busca os dados a cada 5 segundos
+    const interval = setInterval(fetchData, 20000); // Busca os dados a cada 5 segundos
     return () => clearInterval(interval);
   }, []);
 
@@ -42,18 +42,19 @@ export default function SmartFoneScreen() {
 
   return (
     <SmartFoneSafeAreaView>
-      <Text>Smatfone</Text>
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        {data.map(datas => (
-          <View
-            key={`${datas.idUser}-${datas.nameProduct}`}
-            style={{marginBottom: 10}}>
-            <Text>{`Name: ${datas.nameProduct}`}</Text>
-            <Text>{`Descrição: ${datas.description}`}</Text>
-            <Text>{`Email: ${datas.price}`}</Text>
-            <Text>{`Usuario: ${datas.username}`}</Text>
-          </View>
-        ))}
+      <View>
+        {data.length > 0 ? (
+          data.map(datas => (
+            <Container key={datas.nameProduct} style={{marginBottom: 10}}>
+              <Text>{`Name: ${datas.nameProduct}`}</Text>
+              <Text>{`Descrição: ${datas.description}`}</Text>
+              <Text>{`Valor: ${datas.price}`}</Text>
+              <Text>{`Usuario: ${datas.username}`}</Text>
+            </Container>
+          ))
+        ) : (
+          <Text>Não há dados disponíveis</Text>
+        )}
       </View>
     </SmartFoneSafeAreaView>
   );

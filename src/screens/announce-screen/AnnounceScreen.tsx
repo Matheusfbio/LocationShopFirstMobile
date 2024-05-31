@@ -11,12 +11,12 @@ import {
 
 import auth from '@react-native-firebase/auth';
 
-import {KeyboardAvoidingView, TextInput} from 'react-native';
+import {KeyboardAvoidingView, TextInput, ToastAndroid} from 'react-native';
 
 export default function AnnounceScreen() {
   const [nameProduct, setNameProduct] = useState<string | any>('');
   const [description, setDescription] = useState<string | any>('');
-  const [price, setPrice] = useState<string | any>();
+  const [price, setPrice] = useState<string | any>('');
 
   const HandleRegister = async () => {
     try {
@@ -53,15 +53,17 @@ export default function AnnounceScreen() {
       }
 
       const data = await response.json();
-      console.log('Produto cadastrado com sucesso:', data);
+      ToastAndroid.show('Produto cadastrado', 2);
+      console.info('Produto cadastrado', data);
     } catch (error) {
+      ToastAndroid.show('Erro ao cadastrar produto', 2);
       console.error('Erro ao cadastrar produto:', error);
     }
   };
 
   const handleInputChange = (text: any) => {
     // Remove caracteres não numéricos
-    const numericValue = text.replace(/[^0-9]/g, '');
+    const numericValue = text.replace(/[^0-9]/g, '.');
     setPrice(numericValue);
   };
 
