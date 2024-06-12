@@ -1,10 +1,12 @@
-import {Image, SafeAreaView} from 'react-native';
+import {Image, SafeAreaView, Text} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {TaskNavBar} from '../../screens/announce-screen/styles';
 import auth from '@react-native-firebase/auth';
+import {FieldUser, TaskNavBar} from '../../screens/announce-screen/styles';
 
 export default function Avatar() {
-  const [photoURL, setPhotoURL] = useState('');
+  const [photoURL, setPhotoURL] = useState<string | null>('');
+  const [showName, setShowName] = useState<string | null>('');
+  const [showEmail, setShowEmail] = useState<string | null>('');
 
   useEffect(() => {
     function getProfilePhotoURL() {
@@ -12,8 +14,10 @@ export default function Avatar() {
 
       if (user) {
         // Verifica se o usuário tem uma foto de perfil
-        if (user.photoURL) {
+        if (user.photoURL && user.displayName && user.email) {
           setPhotoURL(user.photoURL);
+          setShowName(user.displayName);
+          setShowEmail(user.email);
         } else {
           console.log('O usuário não tem uma foto de perfil.');
         }
@@ -33,14 +37,18 @@ export default function Avatar() {
             source={{uri: photoURL}}
             // eslint-disable-next-line react-native/no-inline-styles
             style={{
-              width: 45,
-              height: 45,
+              width: 65,
+              height: 65,
               borderRadius: 45,
             }}
           />
         ) : (
           <Image source={require('./img/NoPhotoProfile.png')} />
         )}
+        <FieldUser>
+          <Text>{showName}</Text>
+          <Text>{showEmail}</Text>
+        </FieldUser>
       </TaskNavBar>
     </SafeAreaView>
   );

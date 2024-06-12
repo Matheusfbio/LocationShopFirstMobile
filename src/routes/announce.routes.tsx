@@ -17,8 +17,20 @@ export type StackTypes = StackNavigationProp<StackNavigation>;
 const AnnounceRouter = () => {
   return (
     <Stack.Navigator
-      screenOptions={{headerShown: true, headerTitleAlign: 'center'}}>
-      <Stack.Screen name="Location Shop" component={HomeScreen} />
+      screenOptions={{
+        headerShown: true,
+        headerTitleAlign: 'center',
+      }}>
+      <Stack.Screen
+        name="HomeScreen"
+        options={{
+          title: 'Location Shop',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+        component={HomeScreen}
+      />
       <Stack.Screen name="Smartphones" component={SmartPhoneScreen} />
     </Stack.Navigator>
   );

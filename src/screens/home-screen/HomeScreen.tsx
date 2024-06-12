@@ -33,7 +33,6 @@ export default function HomeScreen() {
   return (
     <HomeSafeAreaView>
       <StatusBar backgroundColor={'white'} barStyle={'dark-content'} />
-      {/* <HeaderText>Location Shop</HeaderText> */}
       <HomeContainer>
         <SearchInput>
           <TextInput
@@ -42,9 +41,6 @@ export default function HomeScreen() {
             onChangeText={setSearch}
           />
         </SearchInput>
-        <HomeNavBarIcon>
-          <Avatar />
-        </HomeNavBarIcon>
       </HomeContainer>
       <LocationInfo>
         <Ionicons name="location-outline" color="black" size={20} />
@@ -55,7 +51,7 @@ export default function HomeScreen() {
           <TouchableOpacity onPress={() => navigation.navigate('Smartphones')}>
             <ContainerFlatList>
               <Image source={require('./img/smartphone_icon.png')} />
-              <ShowFlatListText>Smartfone</ShowFlatListText>
+              <ShowFlatListText>Smartphone</ShowFlatListText>
             </ContainerFlatList>
           </TouchableOpacity>
         </ShowFlatList>
