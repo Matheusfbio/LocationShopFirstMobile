@@ -14,9 +14,9 @@ import auth from '@react-native-firebase/auth';
 import {KeyboardAvoidingView, TextInput, ToastAndroid} from 'react-native';
 
 export default function AnnounceScreen() {
-  const [nameProduct, setNameProduct] = useState<string | any>('');
-  const [description, setDescription] = useState<string | any>('');
-  const [price, setPrice] = useState<string | any>('');
+  const [nameProduct, setNameProduct] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
+  const [price, setPrice] = useState<string>('');
 
   const HandleRegister = async () => {
     try {
@@ -61,7 +61,7 @@ export default function AnnounceScreen() {
     }
   };
 
-  const handleInputChange = (text: any) => {
+  const handleInputChange = (text: string) => {
     // Remove caracteres não numéricos
     const numericValue = text.replace(/[^0-9]/g, '.');
     setPrice(numericValue);

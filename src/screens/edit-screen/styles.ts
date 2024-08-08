@@ -12,6 +12,7 @@ export const HeaderText = styled.Text`
   text-align: center;
   margin: 2% auto;
   align-items: center;
+  background-color: red;
 `;
 
 export const FormInput = styled.View`
@@ -22,6 +23,7 @@ export const FormInput = styled.View`
 export const FormField = styled.View`
   gap: 15px;
   padding: 1px;
+  margin-top: 5%;
 `;
 
 export const ButtonSubmit = styled.TouchableOpacity`
@@ -51,7 +53,6 @@ export const FieldUser = styled.View`
   flex-direction: column;
   color: black;
   align-items: start;
-  margin-left: 3%;
   gap: 5px;
 `;
 

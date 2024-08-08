@@ -1,6 +1,6 @@
 import {render} from '@testing-library/react-native';
-import AnnounceScreen from '../AnnounceScreen';
+import AnnounceScreen from '../EditScreen';
+
 test('Render the AnnouceScreen', () => {
-  // eslint-disable-next-line react/react-in-jsx-scope
   render(<AnnounceScreen />);
 });

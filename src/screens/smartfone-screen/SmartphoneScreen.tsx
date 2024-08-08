@@ -1,21 +1,26 @@
-import {Container, SmartFoneSafeAreaView} from './styles';
-import {Text, TextComponent, View} from 'react-native';
-import {useEffect, useState} from 'react';
-
-interface SmartFone {
-  nameProduct: string;
-  description: string;
-  price: string;
-  idUser: string;
-  username: string;
-}
+import {useNavigation} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
+import {ActivityIndicator, Image, Text, TouchableOpacity} from 'react-native';
+import Feather from 'react-native-vector-icons/Feather';
+import {StackTypes} from '../../routes/announce.routes';
+import {
+  ChangeProduct,
+  ContainerOffileProduct,
+  ContainerProduct,
+  Content,
+  SmartFoneSafeAreaView,
+} from './styles';
+import {Products} from '../../interfaces/Products';
 
 export default function SmartPhoneScreen() {
-  const [data, setData] = useState<SmartFone[]>([]);
+  const [data, setData] = useState<Products[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const navigation = useNavigation<StackTypes>();
 
   useEffect(() => {
     fetchData();
-    const interval = setInterval(fetchData, 20000); // Busca os dados a cada 5 segundos
+    const interval = setInterval(fetchData, 20000);
     return () => clearInterval(interval);
   }, []);
 
@@ -29,12 +34,13 @@ export default function SmartPhoneScreen() {
       });
 
       if (!response.ok) {
+        setIsLoading(isLoading);
         throw new Error('Failed to fetch data');
       }
 
       const responseData = await response.json();
       setData(responseData);
-      console.log(responseData);
+      console.info(responseData);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -42,20 +48,32 @@ export default function SmartPhoneScreen() {
 
   return (
     <SmartFoneSafeAreaView>
-      <View>
+      <Content>
         {data.length > 0 ? (
           data.map(datas => (
-            <Container key={datas.nameProduct} style={{marginBottom: 10}}>
-              <Text>{`Name: ${datas.nameProduct}`}</Text>
-              <Text>{`Descrição: ${datas.description}`}</Text>
-              <Text>{`Valor: ${datas.price}`}</Text>
-              <Text>{`Usuario: ${datas.username}`}</Text>
-            </Container>
+            <ContainerProduct
+              key={datas.nameProduct}
+              style={{marginBottom: 10}}>
+              <Image source={require('./img/smartphone_icon.png')} />
+              <Text>{datas.nameProduct}</Text>
+              <Text>{datas.description}</Text>
+              <Text>{datas.price}</Text>
+              <ChangeProduct>
+                <TouchableOpacity>
+                  <Feather name="trash" size={25} />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('Edit')}>
+                  <Feather name="edit" size={25} />
+                </TouchableOpacity>
+              </ChangeProduct>
+            </ContainerProduct>
           ))
         ) : (
-          <Text>Não há dados disponíveis</Text>
+          <ContainerOffileProduct>
+            <ActivityIndicator size="large" />
+          </ContainerOffileProduct>
         )}
-      </View>
+      </Content>
     </SmartFoneSafeAreaView>
   );
 }

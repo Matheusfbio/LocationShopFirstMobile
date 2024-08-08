@@ -1,6 +1,6 @@
-import {Image, SafeAreaView, Text} from 'react-native';
-import React, {useEffect, useState} from 'react';
 import auth from '@react-native-firebase/auth';
+import React, {useEffect, useState} from 'react';
+import {Image, SafeAreaView, Text} from 'react-native';
 import {FieldUser, TaskNavBar} from '../../screens/announce-screen/styles';
 
 export default function Avatar() {
@@ -35,7 +35,6 @@ export default function Avatar() {
         {photoURL ? (
           <Image
             source={{uri: photoURL}}
-            // eslint-disable-next-line react-native/no-inline-styles
             style={{
               width: 65,
               height: 65,

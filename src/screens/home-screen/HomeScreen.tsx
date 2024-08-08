@@ -1,6 +1,4 @@
 import {
-  FlatList,
-  FlatListComponent,
   Image,
   ScrollView,
   StatusBar,
@@ -10,9 +8,7 @@ import {
 import React, {useState} from 'react';
 import {
   ContainerFlatList,
-  HeaderText,
   HomeContainer,
-  HomeNavBarIcon,
   HomeSafeAreaView,
   LocationInfo,
   LocationText,
@@ -22,7 +18,6 @@ import {
 } from './styles';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Avatar from '../../Components/avatar/avatar';
 import {useNavigation} from '@react-navigation/native';
 import {StackTypes} from '../../routes/announce.routes';
 

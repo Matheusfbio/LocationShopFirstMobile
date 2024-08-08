@@ -30,11 +30,10 @@ export function TabBarRoutes() {
         }}
       />
       <Screen
-        name="Users"
+        name="Anuncio"
         component={AnnounceScreen}
         options={{
           tabBarLabel: '',
-          // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({color, size}) => (
             <IconView>
               <Entypo name="shop" color={color} size={size + 10} />
