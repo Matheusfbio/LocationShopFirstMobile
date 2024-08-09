@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import {
   createStackNavigator,
   StackNavigationProp,
@@ -5,11 +6,12 @@ import {
 import EditScreen from '../screens/edit-screen/EditScreen';
 import HomeScreen from '../screens/home-screen';
 import SmartPhoneScreen from '../screens/smartfone-screen/SmartphoneScreen';
+import {Products} from '../interfaces/Products';
 
 type StackNavigation = {
   HomeScreen: undefined;
   Smartphones: undefined;
-  Edit: undefined;
+  Edit: Products;
 };
 
 const Stack = createStackNavigator();
@@ -37,7 +39,7 @@ const AnnounceRouter = () => {
       <Stack.Screen
         name="Edit"
         component={EditScreen}
-        options={{title: 'Editar anuncios'}}
+        options={{title: 'Editar anuncios', gestureEnabled: true}}
       />
     </Stack.Navigator>
   );

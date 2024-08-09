@@ -3,6 +3,6 @@ export interface Products {
   nameProduct: string;
   description: string;
   price: string;
-  idUser: string;
-  username: string;
+  idUser?: string;
+  username?: string;
 }
