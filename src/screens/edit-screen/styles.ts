@@ -23,7 +23,7 @@ export const FormInput = styled.View`
 export const FormField = styled.View`
   gap: 15px;
   padding: 1px;
-  margin-top: 5%;
+  /* margin-top: 2%; */
 `;
 
 export const ButtonSubmit = styled.TouchableOpacity`

@@ -7,6 +7,7 @@ import EditScreen from '../screens/edit-screen/EditScreen';
 import HomeScreen from '../screens/home-screen';
 import SmartPhoneScreen from '../screens/smartfone-screen/SmartphoneScreen';
 import {Products} from '../interfaces/Products';
+import {Animated} from 'react-native';
 
 type StackNavigation = {
   HomeScreen: undefined;
@@ -39,7 +40,13 @@ const AnnounceRouter = () => {
       <Stack.Screen
         name="Edit"
         component={EditScreen}
-        options={{title: 'Editar anuncios', gestureEnabled: true}}
+        options={{
+          title: 'Editar anuncios',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+          gestureEnabled: true,
+        }}
       />
     </Stack.Navigator>
   );
