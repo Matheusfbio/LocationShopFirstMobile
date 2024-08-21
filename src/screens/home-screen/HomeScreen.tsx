@@ -1,5 +1,4 @@
 import {
-  FlatList,
   Image,
   ScrollView,
   StatusBar,
@@ -9,9 +8,7 @@ import {
 import React, {useState} from 'react';
 import {
   ContainerFlatList,
-  HeaderText,
   HomeContainer,
-  HomeNavBarIcon,
   HomeSafeAreaView,
   LocationInfo,
   LocationText,
@@ -21,38 +18,16 @@ import {
 } from './styles';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Avatar from '../../Components/avatar/avatar';
-
-interface CarouselItem {
-  imgLocal: number;
-  categoryName: string;
-}
-
-const carouselItems: CarouselItem[] = [
-  {
-    imgLocal: require('./img/category_icon.png'),
-    categoryName: 'Todas as categorias',
-  },
-  {
-    imgLocal: require('./img/furniture_icon.png'),
-    categoryName: 'Moveis',
-  },
-  {
-    imgLocal: require('./img/vehicle_icon.png'),
-    categoryName: 'Automoveis',
-  },
-  {
-    imgLocal: require('./img/sell_icon.png'),
-    categoryName: 'Vende & Alugar',
-  },
-];
+import {useNavigation} from '@react-navigation/native';
+import {StackTypes} from '../../routes/announce.routes';
 
 export default function HomeScreen() {
   const [search, setSearch] = useState('');
+  const navigation = useNavigation<StackTypes>();
+
   return (
     <HomeSafeAreaView>
       <StatusBar backgroundColor={'white'} barStyle={'dark-content'} />
-      <HeaderText>Location Shop</HeaderText>
       <HomeContainer>
         <SearchInput>
           <TextInput
@@ -61,9 +36,6 @@ export default function HomeScreen() {
             onChangeText={setSearch}
           />
         </SearchInput>
-        <HomeNavBarIcon>
-          <Avatar />
-        </HomeNavBarIcon>
       </HomeContainer>
       <LocationInfo>
         <Ionicons name="location-outline" color="black" size={20} />
@@ -71,19 +43,12 @@ export default function HomeScreen() {
       </LocationInfo>
       <ScrollView>
         <ShowFlatList>
-          <FlatList
-            data={carouselItems}
-            showsHorizontalScrollIndicator={false}
-            renderItem={({item}) => (
-              <TouchableOpacity>
-                <ContainerFlatList>
-                  <Image source={item.imgLocal} />
-                  <ShowFlatListText>{item.categoryName}</ShowFlatListText>
-                </ContainerFlatList>
-              </TouchableOpacity>
-            )}
-            horizontal={true}
-          />
+          <TouchableOpacity onPress={() => navigation.navigate('Smartphones')}>
+            <ContainerFlatList>
+              <Image source={require('./img/smartphone_icon.png')} />
+              <ShowFlatListText>Smartphone</ShowFlatListText>
+            </ContainerFlatList>
+          </TouchableOpacity>
         </ShowFlatList>
       </ScrollView>
     </HomeSafeAreaView>

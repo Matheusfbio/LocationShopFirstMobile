@@ -7,11 +7,11 @@ export const AnnounceSafeAreaView = styled.SafeAreaView`
 `;
 
 export const HeaderText = styled.Text`
-  width: 100%;
   color: black;
-  font-size: 25px;
+  font-size: 22px;
   text-align: center;
   margin: 2% auto;
+  align-items: center;
 `;
 
 export const FormInput = styled.View`
@@ -41,6 +41,18 @@ export const ButtonText = styled.Text`
 
 export const TaskNavBar = styled.View`
   flex-direction: row;
+  width: 80%;
+  /* margin-top: 5%; */
+  margin-left: 10%;
+  align-items: center;
+  gap: 5px;
+`;
+export const FieldUser = styled.View`
+  flex-direction: column;
+  color: black;
+  align-items: start;
+  margin-left: 3%;
+  gap: 5px;
 `;
 
 export const TaskContent = styled.Text`

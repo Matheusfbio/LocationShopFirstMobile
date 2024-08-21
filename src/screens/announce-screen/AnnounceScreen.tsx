@@ -8,76 +8,63 @@ import {
   ButtonSubmit,
   ButtonText,
 } from './styles';
-import {KeyboardAvoidingView, Text, TextInput, View} from 'react-native';
 
-interface DataItem {
-  id: number;
-  attributes: {
-    description: string;
-    title: string;
-    createdAt: string;
-    updatedAt: string;
-    publishedAt: string;
-    locale: string;
-    price: number | null;
-  };
-}
+import auth from '@react-native-firebase/auth';
+
+import {KeyboardAvoidingView, TextInput, ToastAndroid} from 'react-native';
 
 export default function AnnounceScreen() {
-  const [title, setTitle] = useState<DataItem | any>('');
-  const [description, setDescription] = useState<DataItem | any>('');
-  const [price, setPrice] = useState<DataItem | any>();
-  //Save data of api strapi
-  const [data, setData] = useState<DataItem[]>([]);
+  const [nameProduct, setNameProduct] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
+  const [price, setPrice] = useState<string>('');
 
-  const url = 'http://192.168.0.107:1337';
-
-  const token =
-    'b6c4322b17a72a17de2b2f2f1d9bdfa71660af8d8cf73de2d165fe09c257ad4d3e55b3cf596fcf62802a7fdfa5cbf4d77b110869f22af894f126fb7abd74b37ea611d7c844cf0d24619f9cc590cdd37c1ec31ed358cb9425d90076f594a028d62f6d76421058f0a923881eb6d28b29719d339f8cc55f80c88ad85b25637205c4';
-
-  const handleInputChange = (text: any) => {
-    // Remove caracteres não numéricos
-    const numericValue = text.replace(/[^0-9]/g, '');
-    setPrice(numericValue);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-  // Call the data of Api
-  const fetchData = async () => {
+  const HandleRegister = async () => {
     try {
-      const response = await fetch(`${url}/api/products`, {
-        method: 'GET',
+      // Verifica se existe um usuário autenticado
+      const userId = auth().currentUser;
+      const username = auth().currentUser?.displayName;
+      if (!userId) {
+        throw new Error('Usuário não autenticado');
+      }
+
+      // Obtém o UID do usuário autenticado
+      const uid = userId.uid;
+      const user = username;
+
+      // Cria o objeto do produto com o UID do usuário
+      const product = {
+        nameProduct,
+        description,
+        price,
+        idUser: uid,
+        username: user, // Use diretamente o UID obtido
+      };
+
+      const response = await fetch('http://192.168.0.107:8080/products', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify(product),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to fetch data');
+        throw new Error('Erro ao cadastrar produto');
       }
 
-      const responseData = await response.json();
-      setData(responseData.data);
+      const data = await response.json();
+      ToastAndroid.show('Produto cadastrado', 2);
+      console.info('Produto cadastrado', data);
     } catch (error) {
-      console.error('Error fetching data:', error);
+      ToastAndroid.show('Erro ao cadastrar produto', 2);
+      console.error('Erro ao cadastrar produto:', error);
     }
   };
 
-  const HandleRegister = async () => {
-    const AnnounceData = {
-      data: [
-        {
-          id: null, // Como este é um novo item, o ID pode ser null
-          attributes: {
-            title: title,
-            description: description,
-            price: price,
-          },
-        },
-      ],
-    };
+  const handleInputChange = (text: string) => {
+    // Remove caracteres não numéricos
+    const numericValue = text.replace(/[^0-9]/g, '.');
+    setPrice(numericValue);
   };
 
   return (
@@ -90,8 +77,8 @@ export default function AnnounceScreen() {
           <FormInput>
             <TextInput
               placeholder="Titulo"
-              onChangeText={setTitle}
-              value={title}
+              onChangeText={setNameProduct}
+              value={nameProduct}
             />
           </FormInput>
           <FormInput>
@@ -109,24 +96,11 @@ export default function AnnounceScreen() {
               onChangeText={handleInputChange}
             />
           </FormInput>
-          <ButtonSubmit onPress={HandleRegister}>
+          <ButtonSubmit id="HandleSubmit" onPress={HandleRegister}>
             <ButtonText>Anunciar</ButtonText>
           </ButtonSubmit>
         </FormField>
       </KeyboardAvoidingView>
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        {data.length > 0 ? (
-          data.map((item: DataItem) => (
-            <View key={item.id}>
-              <Text>Descrição: {item.attributes.description}</Text>
-              <Text>Título: {item.attributes.title}</Text>
-              <Text>Valor: {item.attributes.price}</Text>
-            </View>
-          ))
-        ) : (
-          <Text>Nenhum dado disponível</Text>
-        )}
-      </View>
     </AnnounceSafeAreaView>
   );
 }

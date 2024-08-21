@@ -70,9 +70,9 @@ export const HeaderText = styled.Text`
   margin: 2% auto;
 `;
 export const SearchInput = styled.View`
-  width: 85%;
+  width: 98%;
   margin: 0 1% 0 0;
-  height: 90%;
+  height: 100%;
   border: 2px;
   border-radius: 10px;
 `;
