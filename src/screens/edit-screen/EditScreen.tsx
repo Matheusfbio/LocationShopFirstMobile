@@ -51,7 +51,10 @@ export default function EditScreen() {
     }
 
     axios
-      .put(`http://192.168.0.107:8080/products/${productData.id}`, productData)
+      .patch(
+        `http://192.168.0.107:8080/products/${productData.id}`,
+        productData,
+      )
       .then(response => {
         console.log('Produto atualizado com sucesso:', response.data);
         navigation.goBack();

@@ -21,19 +21,37 @@ import {Products} from '../../interfaces/Products';
 import axios from 'axios';
 
 type StackTypes = {
-  navigate: (screen: string, params?: {productId: string}) => void; // o que isso retorna
+  navigate: (screen: string, params?: {productId: string}) => void;
 };
 
 export default function SmartPhoneScreen() {
-  const [product, setProducts] = useState<Products[]>([]);
+  const [products, setProducts] = useState<Products[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   const navigation = useNavigation<StackTypes>();
 
   const showToastWithGravity = () => {
-    ToastAndroid.show('Em breve', 3);
+    ToastAndroid.show('deletado com sucesso', 3);
   };
+
+  const handleDeleteProduct = useCallback((id: string) => {
+    axios
+      .delete(`http://192.168.0.107:8080/products/${id}`)
+      .then(response => {
+        setProducts(prevProducts =>
+          prevProducts.filter(product => product.id !== id),
+        );
+        showToastWithGravity();
+        console.log('Produto deletado com sucesso:', response.data);
+      })
+      .catch(error => {
+        console.error(
+          'Erro ao deletar produto:',
+          error.response?.data || error,
+        );
+      });
+  }, []);
 
   const fetchData = useCallback(async () => {
     setIsLoading(true);
@@ -54,7 +72,7 @@ export default function SmartPhoneScreen() {
   const onRefresh = useCallback(async () => {
     setIsRefreshing(true);
     await fetchData();
-    console.log(product);
+    console.log(...products);
     setIsRefreshing(false);
   }, [fetchData]);
 
@@ -69,13 +87,13 @@ export default function SmartPhoneScreen() {
           <ContainerOffileProduct>
             <ActivityIndicator size="large" />
           </ContainerOffileProduct>
-        ) : product.length > 0 ? (
+        ) : products.length > 0 ? (
           <ScrollView
             refreshControl={
               <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
             }>
-            {product.length > 0 ? (
-              product.map(item => (
+            {products.length > 0 ? (
+              products.map(item => (
                 <ContainerProduct
                   key={item.id || Math.random().toString()}
                   style={{marginBottom: 10}}>
@@ -85,7 +103,9 @@ export default function SmartPhoneScreen() {
                   <Text>{item.description}</Text>
                   <Text>{item.price}</Text>
                   <ChangeProduct>
-                    <TouchableOpacity onPress={showToastWithGravity}>
+                    <TouchableOpacity
+                      onPress={() => handleDeleteProduct(item.id!)}
+                      key={item.id}>
                       <Feather name="trash" size={25} />
                     </TouchableOpacity>
                     {item.id && (
@@ -104,9 +124,14 @@ export default function SmartPhoneScreen() {
             )}
           </ScrollView>
         ) : (
-          <ContainerOffileProduct>
-            <Text>Nenhum produto encontrado</Text>
-          </ContainerOffileProduct>
+          <ScrollView
+            refreshControl={
+              <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
+            }>
+            <ContainerOffileProduct>
+              <Text>Nenhum produto encontrado</Text>
+            </ContainerOffileProduct>
+          </ScrollView>
         )}
       </Content>
     </SmartFoneSafeAreaView>
