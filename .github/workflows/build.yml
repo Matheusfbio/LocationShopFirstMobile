@@ -1,65 +1,28 @@
-name: Build and Release Android App
-
+name: Build Android
 on:
   push:
-    tags:
-      - 'v*.*.*' # O workflow só será executado em pushs para tags que sigam este padrão, ex: v1.0.0
-
+    branches: [main]
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Set current date as env variable
-        run: echo "date_today=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-
-      - name: Set repository name as env variable
-        run: echo "repository_name=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')" >> $GITHUB_ENV
-
-      - name: Setup JDK
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'zulu'
-          java-version: '17'
-
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18.x
+      - uses: actions/checkout@v2
 
       - name: Install dependencies
-        run: yarn install
+        run: yarn
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v2
+      - name: Build Android Release
+        run: cd android && ./gradlew assembleRelease
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x android/gradlew
-
-      - name: Grant execute permission for gradlew
-        run: chmod +x android/gradlew
-
-      - name: Build Android APK
-        run: |
-          cd android
-          ./gradlew assembleRelease
-
-      - name: Build Android AAB
-        run: |
-          cd android
-          ./gradlew bundleRelease
-
-      - name: Upload APK Release
-        uses: actions/upload-artifact@v3
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
         with:
-          name: APK(s) release generated
-          path: android/app/build/outputs/apk/release/
+          name: release
+          path: android/app/build/outputs/apk/release/app-release.apk
 
-      - name: Upload AAB (App Bundle) Release
-        uses: actions/upload-artifact@v3
+      - name: Install Java
+        uses: actions/setup-java@v3
         with:
-          name: App bundle(s) AAB release generated
-          path: android/app/build/outputs/bundle/release/
+          java-version: 17
+          distribution: adopt
+          cache: gradle
