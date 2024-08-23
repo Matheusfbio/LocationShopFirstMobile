@@ -1,4 +1,5 @@
 name: Build and Release Android App
+name: Build and Release Android App
 
 on:
   push:
@@ -39,6 +40,9 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x android/gradlew
 
+      - name: Grant execute permission for gradlew
+        run: chmod +x android/gradlew
+
       - name: Build Android APK
         run: |
           cd android
@@ -60,34 +64,3 @@ jobs:
         with:
           name: App bundle(s) AAB release generated
           path: android/app/build/outputs/bundle/release/
-
-  release:
-    runs-on: ubuntu-latest
-    needs: build # Espera o job de build terminar
-
-    steps:
-      - name: Download APK and AAB artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: APK(s) release generated
-          path: ./artifacts/apk
-
-      - name: Download AAB artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: App bundle(s) AAB release generated
-          path: ./artifacts/aab
-
-      - name: Create GitHub Release
-        uses: actions/create-release@v1
-        with:
-          tag_name: ${{ github.ref }} # Utiliza a tag que disparou o workflow
-          release_name: Release ${{ github.ref }}
-          body: |
-            **Novidades:**
-            - Descreva as mudanças mais importantes desta release.
-          draft: false
-          prerelease: false
-          files: |
-            ./artifacts/apk/*.apk
-            ./artifacts/aab/*.aab
