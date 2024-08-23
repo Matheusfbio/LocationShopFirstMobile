@@ -13,13 +13,19 @@ import {
   SettingsText,
   SubContainer,
 } from './styles';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 export default function SettingScreen() {
-  const handleSignOut = () => {
-    auth()
-      .signOut()
-      .then(() => console.log('User signed out!'));
-  };
+  async function SignOutAndRevoke() {
+    try {
+      await GoogleSignin.revokeAccess();
+      await auth().signOut();
+      console.log('User signed out and access revoked');
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <SettingsSafeAreaView>
       <SettingsText>Profile</SettingsText>
@@ -87,7 +93,7 @@ export default function SettingScreen() {
           </Button>
           <Line />
           <Button>
-            <TouchableOpacity onPress={() => handleSignOut()}>
+            <TouchableOpacity onPress={() => SignOutAndRevoke()}>
               <FontButton>
                 <Text>Logout</Text>
               </FontButton>

@@ -7,7 +7,6 @@ import EditScreen from '../screens/edit-screen/EditScreen';
 import HomeScreen from '../screens/home-screen';
 import SmartPhoneScreen from '../screens/smartfone-screen/SmartphoneScreen';
 import {Products} from '../interfaces/Products';
-import {Animated} from 'react-native';
 
 type StackNavigation = {
   HomeScreen: undefined;
@@ -25,6 +24,13 @@ const AnnounceRouter = () => {
       screenOptions={{
         headerShown: true,
         headerTitleAlign: 'center',
+        headerStyle: {
+          backgroundColor: '#fff', // Cor do fundo da barra de navegação
+        },
+        headerTintColor: '#000000', // Cor do texto e ícones na barra de navegação
+        headerTitleStyle: {
+          fontWeight: 'bold', // Personalização do estilo do título
+        },
       }}>
       <Stack.Screen
         name="HomeScreen"
@@ -36,7 +42,16 @@ const AnnounceRouter = () => {
         }}
         component={HomeScreen}
       />
-      <Stack.Screen name="Smartphones" component={SmartPhoneScreen} />
+      <Stack.Screen
+        name="Smartphones"
+        component={SmartPhoneScreen}
+        options={{
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+          gestureEnabled: true,
+        }}
+      />
       <Stack.Screen
         name="Edit"
         component={EditScreen}
