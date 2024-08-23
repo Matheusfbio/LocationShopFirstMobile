@@ -1,15 +1,21 @@
-name: Build Android
+name: Build and Release Android APK
+
 on:
   push:
     branches: [main]
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
 
       - name: Install dependencies
         run: yarn
+
+      - name: Make gradlew executable
+        run: chmod +x android/gradlew
 
       - name: Build Android Release
         run: cd android && ./gradlew assembleRelease
@@ -26,3 +32,22 @@ jobs:
           java-version: 17
           distribution: adopt
           cache: gradle
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ github.run_number }}
+          release_name: Release v${{ github.run_number }}
+          draft: false
+          prerelease: false
+
+      - name: Upload APK to GitHub Release
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: android/app/build/outputs/apk/release/app-release.apk
+          asset_name: app-release.apk
+          asset_content_type: application/vnd.android.package-archive
