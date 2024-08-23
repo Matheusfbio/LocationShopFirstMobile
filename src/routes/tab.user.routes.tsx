@@ -5,7 +5,6 @@ import SettingScreen from '../screens/setting-screen/SettingScreen';
 import Entypo from 'react-native-vector-icons/Entypo';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import AnnounceScreen from '../screens/announce-screen';
-import HomeScreen from '../screens/home-screen';
 import {IconView} from './styles';
 import AnnounceRouter from './announce.routes';
 
@@ -46,7 +45,6 @@ export function TabBarRoutes() {
         component={SettingScreen}
         options={{
           tabBarLabel: '',
-          // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({color, size}) => (
             <IconView>
               <SimpleLineIcons name="menu" size={size + 6} color={color} />
