@@ -2,8 +2,7 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import SettingScreen from '../screens/setting-screen/SettingScreen';
-import Entypo from 'react-native-vector-icons/Entypo';
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import Materiallcons from 'react-native-vector-icons/MaterialIcons';
 import AnnounceScreen from '../screens/announce-screen';
 import {IconView} from './styles';
 import AnnounceRouter from './announce.routes';
@@ -20,10 +19,14 @@ export function TabBarRoutes() {
         name="Home"
         component={AnnounceRouter}
         options={{
-          tabBarLabel: '',
+          tabBarLabel: 'home',
+          tabBarLabelStyle: {
+            position: 'relative',
+            bottom: 5,
+          },
           tabBarIcon: ({color, size}) => (
             <IconView>
-              <Entypo name="home" color={color} size={size + 10} />
+              <Materiallcons name="home-filled" color={color} size={size + 1} />
             </IconView>
           ),
         }}
@@ -32,10 +35,18 @@ export function TabBarRoutes() {
         name="Anuncio"
         component={AnnounceScreen}
         options={{
-          tabBarLabel: '',
+          tabBarLabel: 'anunciar',
+          tabBarLabelStyle: {
+            position: 'relative',
+            bottom: 5,
+          },
           tabBarIcon: ({color, size}) => (
             <IconView>
-              <Entypo name="shop" color={color} size={size + 10} />
+              <Materiallcons
+                name="add-circle-outline"
+                color={color}
+                size={size + 1}
+              />
             </IconView>
           ),
         }}
@@ -44,10 +55,14 @@ export function TabBarRoutes() {
         name="Config"
         component={SettingScreen}
         options={{
-          tabBarLabel: '',
+          tabBarLabel: 'configuração',
+          tabBarLabelStyle: {
+            position: 'relative',
+            bottom: 5,
+          },
           tabBarIcon: ({color, size}) => (
             <IconView>
-              <SimpleLineIcons name="menu" size={size + 6} color={color} />
+              <Materiallcons name="settings" color={color} size={size + 1} />
             </IconView>
           ),
         }}

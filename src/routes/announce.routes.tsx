@@ -35,7 +35,8 @@ const AnnounceRouter = () => {
       <Stack.Screen
         name="HomeScreen"
         options={{
-          title: 'Location Shop',
+          title: '',
+          headerTransparent: true,
           headerTitleStyle: {
             fontWeight: 'bold',
           },

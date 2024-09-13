@@ -47,7 +47,7 @@ export const ContainerFlatList = styled.View`
   padding: 20px;
   border-radius: 12px;
   gap: 12px;
-  margin: 0 10px auto;
+  margin: 0 10px 12px;
   flex-direction: column;
   align-items: center;
 `;

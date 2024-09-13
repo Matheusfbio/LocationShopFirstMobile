@@ -1,10 +1,9 @@
 import styled from 'styled-components/native';
 
 export const IconView = styled.View`
-  /* flex-direction: row; */
   justify-content: center;
   align-items: center;
-  margin: 1% 0 -10% 0;
+  margin: 1% 0 -1% 0;
 `;
 
 export const TaskBody = styled.View`
