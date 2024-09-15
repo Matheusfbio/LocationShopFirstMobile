@@ -10,11 +10,12 @@ import {
   DropDownTextCondition,
   DropDownConditionOptions,
   DropDownIcon,
-  Container,
-  ButtonStyled,
   ImageContainer,
   ImageWrapper,
   StyledImage,
+  ButtonImages,
+  Container,
+  Remove,
 } from './styles';
 
 import auth from '@react-native-firebase/auth';
@@ -31,6 +32,7 @@ import {
 } from 'react-native';
 
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {ScrollView} from 'react-native-gesture-handler';
 import {
   ImageLibraryOptions,
@@ -49,6 +51,9 @@ export default function AnnounceScreen() {
   const [description, setDescription] = useState<string>('');
   const [price, setPrice] = useState<string>('');
 
+  // Adicionando um estado para controlar se o botão deve estar habilitado
+  const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
+
   // Alterado para armazenar várias imagens
   const [imageUris, setImageUris] = useState<string[]>([]); // Armazenar as URIs das imagens
   const [imageData, setImageData] = useState<unknown[]>([]); // Armazenar os dados das imagens
@@ -56,6 +61,29 @@ export default function AnnounceScreen() {
   useEffect(() => {
     console.log('Image URIs:', imageUris);
   }, [imageUris]);
+
+  useEffect(() => {
+    // Verifica se todos os campos obrigatórios estão preenchidos
+    if (
+      nameProduct &&
+      description &&
+      price &&
+      selectedValueCondition &&
+      selectedValueCategory &&
+      imageUris.length > 0
+    ) {
+      setIsSubmitEnabled(true); // Habilita o botão
+    } else {
+      setIsSubmitEnabled(false); // Desabilita o botão
+    }
+  }, [
+    nameProduct,
+    description,
+    price,
+    selectedValueCondition,
+    selectedValueCategory,
+    imageUris,
+  ]);
 
   const toggleConditionExpanded = useCallback(
     () => setConditionExpanded(!conditionExpanded),
@@ -176,8 +204,6 @@ export default function AnnounceScreen() {
       <ScrollView>
         <KeyboardAvoidingView>
           <FormField>
-            {/* Botão para selecionar imagens */}
-
             <FormInput>
               <TextInput
                 placeholder="Título"
@@ -287,26 +313,27 @@ export default function AnnounceScreen() {
                 </Modal>
               )}
             </View>
-
             <Container>
               <ImageContainer>
                 {imageUris.map((uri, index) => (
                   <ImageWrapper key={index}>
                     <StyledImage source={{uri}} />
-                    <ButtonStyled
-                      title="Remover"
-                      onPress={() => removeImage(index)}
-                    />
+                    <Remove onPress={() => removeImage(index)}>
+                      <EvilIcons name="trash" size={40} color="white" />
+                    </Remove>
                   </ImageWrapper>
                 ))}
               </ImageContainer>
-              <ButtonStyled title="Selecionar Imagem" onPress={selectImage} />
+              <ButtonImages onPress={selectImage}>
+                <ButtonText>Selecionar Imagem</ButtonText>
+              </ButtonImages>
             </Container>
-
-            <ButtonSubmit id="HandleSubmit" onPress={handleFormSubmit}>
-              <ButtonText>Anunciar</ButtonText>
-            </ButtonSubmit>
           </FormField>
+          <ButtonSubmit
+            disabled={!isSubmitEnabled} // Desabilita o botão se os campos não estiverem completos
+            onPress={handleFormSubmit}>
+            <ButtonText>Publicar</ButtonText>
+          </ButtonSubmit>
         </KeyboardAvoidingView>
       </ScrollView>
     </AnnounceSafeAreaView>

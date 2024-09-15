@@ -65,11 +65,35 @@ export const FormField = styled.View`
 `;
 
 export const ButtonSubmit = styled.TouchableOpacity`
+  background-color: ${props => (props.disabled ? '#ccc' : '#020083')};
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
   margin: auto;
   border: 3px;
   padding: 15px;
   border-radius: 10px;
   margin: 0% 4.5%;
+`;
+
+export const ButtonImages = styled.TouchableOpacity`
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+  border: 3px;
+  padding: 4%;
+  border-radius: 10px;
+  margin: 0% -1% 1.5%;
+  background-color: #020083;
+`;
+export const Remove = styled.TouchableOpacity`
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+  border: 3px;
+  padding: 2% 0% 5.5% 0%;
+  border-radius: 10px;
+  margin: 2% 0% 0%;
   background-color: #020083;
 `;
 
@@ -105,8 +129,6 @@ export const Container = styled.View`
   margin: 0 5%;
   /* background-color: red; */
 `;
-
-export const ButtonStyled = styled.Button``;
 
 export const ImageContainer = styled.View`
   flex-direction: row;
