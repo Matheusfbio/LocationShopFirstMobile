@@ -1,5 +1,51 @@
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
+Preview app
+
+
+
+https://github.com/user-attachments/assets/2e8d71fc-22ca-424e-8ff4-404797bebfed
+
+----
+
+### what was done at the time 
+- [ ] Screens
+	- [x] Login
+		- [x] Style ✅ 2024-04-15
+			- [x] Background image ✅ 2024-04-15
+			- [x] buttons ✅ 2024-04-15
+		- [ ] Sign up with email and password
+		- [x] Google Sign
+	- [x] Home 
+		- [x] category
+			- [x] Carousel with categories
+		- [ ] show products of each category
+	- [X] Announcement
+		- [X] Unannounced CRUD
+	- [x] SignOut
+	- [ ] Store-Screen
+		- [ ] The Crud-Shop
+		- [ ] Style
+- [ ] Theme and color
+- [ ] Database 
+	- [ ] User
+		- [x] Google Sign in ✅ 2024-05-12
+		- [x] Google Exit ✅ 2024-05-12
+		- [ ] Email signature
+		- [ ] E-mail Leave
+	- [ ] Product
+		- [x] GET ✅ 2024-04-18
+		- [x] POST ✅ 2024-04-18
+		- [x] PUT by ID ✅ 2024-05-06
+		- [x] DELETE by ID ✅ 2024-05-06
+	- [x] Backend (Spring Boot) ✅ 2024-05-12
+	- [x] Postgres ✅ 2024-04-22
+	- [x] Docker compose with spring boot and postgres running ✅ 2024-05-12
+		- [x] Spring boot ✅ 2024-05-04
+		- [x] Postgres ✅ 2024-05-04
+
+
+
 # Getting Started
 
 >**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
