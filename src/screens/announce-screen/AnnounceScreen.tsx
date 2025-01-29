@@ -16,6 +16,7 @@ import {
   ButtonImages,
   Container,
   Remove,
+  ButtonTextSubmit,
 } from './styles';
 
 import auth from '@react-native-firebase/auth';
@@ -38,6 +39,8 @@ import {
   ImageLibraryOptions,
   launchImageLibrary,
 } from 'react-native-image-picker';
+import {useNavigation} from '@react-navigation/native';
+import {OneStackTypes, StackTypes} from '../../routes/upload.routes';
 
 export default function AnnounceScreen() {
   const [conditionExpanded, setConditionExpanded] = useState(false);
@@ -57,6 +60,8 @@ export default function AnnounceScreen() {
   // Alterado para armazenar várias imagens
   const [imageUris, setImageUris] = useState<string[]>([]); // Armazenar as URIs das imagens
   const [imageData, setImageData] = useState<unknown[]>([]); // Armazenar os dados das imagens
+
+  const navigation = useNavigation<OneStackTypes>();
 
   useEffect(() => {
     console.log('Image URIs:', imageUris);
@@ -102,6 +107,10 @@ export default function AnnounceScreen() {
   const handleCategorySelect = (item: {value: string; label: string}) => {
     setSelectedValueCategory(item.value);
     setCategoryExpanded(false);
+  };
+
+  const handleUploadAnnounce = () => {
+    navigation.navigate('Uploader');
   };
 
   const selectImage = () => {
@@ -173,19 +182,32 @@ export default function AnnounceScreen() {
         });
       });
 
-      const response = await fetch('http://192.168.0.107:8080/products', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'multipart/form-data',
+      const responseProducts = await fetch(
+        'http://192.168.0.107:8080/products',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+          body: formData,
         },
-        body: formData,
-      });
+      );
+      // const responseImages = await fetch(
+      //   'http://192.168.0.107:8080/images/upload',
+      //   {
+      //     method: 'POST',
+      //     headers: {
+      //       // 'Content-Type': 'multipart/form-data',
+      //     },
+      //     body: formData,
+      //   },
+      // );
 
-      if (!response.ok) {
-        throw new Error('Erro ao cadastrar produto');
-      }
+      // if (!responseProducts.ok) {
+      //   throw new Error('Erro ao cadastrar produto');
+      // }
 
-      const data = await response.json();
+      const data = await responseProducts.json();
       ToastAndroid.show('Produto cadastrado', 2);
       console.info('Produto cadastrado', data);
     } catch (error) {
@@ -324,15 +346,17 @@ export default function AnnounceScreen() {
                   </ImageWrapper>
                 ))}
               </ImageContainer>
-              <ButtonImages onPress={selectImage}>
+              <ButtonImages onPress={handleUploadAnnounce}>
+                <EvilIcons name="camera" size={50} color="black" />
                 <ButtonText>Selecionar Imagem</ButtonText>
+                <ButtonText>0 de 10 imagens</ButtonText>
               </ButtonImages>
             </Container>
           </FormField>
           <ButtonSubmit
             disabled={!isSubmitEnabled} // Desabilita o botão se os campos não estiverem completos
             onPress={handleFormSubmit}>
-            <ButtonText>Publicar</ButtonText>
+            <ButtonTextSubmit>Publicar</ButtonTextSubmit>
           </ButtonSubmit>
         </KeyboardAvoidingView>
       </ScrollView>

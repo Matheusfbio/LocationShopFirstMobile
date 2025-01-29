@@ -24,23 +24,30 @@ import {
 GoogleSignin.configure({
   webClientId: config.WEB_CLIENT_ID,
   offlineAccess: true,
+  forceCodeForRefreshToken: true, // Força o uso do refresh token
 });
 
 async function GoogleSignIn() {
-  // Check if your device supports Google Play
-  await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
-  // Get the users ID token
-  const {idToken} = await GoogleSignin.signIn();
+  try {
+    console.log('Verificando Google Play Services...');
+    await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
+    console.log('Serviços do Google Play disponíveis.');
 
-  // Create a Google credential with the token
-  const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+    const {idToken} = await GoogleSignin.signIn();
+    console.log('Token obtido:', idToken);
 
-  // Sign-in the user with the credential
-  return auth().signInWithCredential(googleCredential);
+    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+    console.log('Credential obtido:', googleCredential);
+
+    return auth().signInWithCredential(googleCredential);
+  } catch (error) {
+    console.error('Erro no Google Sign-In:', error.message);
+    console.log('Erro completo:', JSON.stringify(error, null, 2)); // Log detalhado do erro
+  }
 }
 
 const showToastWithGravity = () => {
-  ToastAndroid.show('Não esta disponivel', 2);
+  ToastAndroid.show('Não está disponível', 2);
 };
 
 export function Message() {
@@ -59,14 +66,12 @@ export function Message() {
     <SafeAreaView>
       <MessageSign>
         <TextContainer>Sign in with</TextContainer>
-        <View>
-          <TouchableOpacity onPress={() => GoogleSignIn()}>
-            <SignInButton>
-              <FontAwesome5 name="google" size={25} color="black" />
-              <MessageText>Sign In with Google</MessageText>
-            </SignInButton>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity onPress={() => GoogleSignIn()}>
+          <SignInButton>
+            <FontAwesome5 name="google" size={25} color="black" />
+            <MessageText>Sign In with Google</MessageText>
+          </SignInButton>
+        </TouchableOpacity>
         <MessageSignDiv>
           <Text>__________________</Text>
           <Text>Or</Text>

@@ -38,7 +38,7 @@ export const DropDownConditionOptions = styled.View`
 export const DropDownTextCondition = styled.View`
   flex-direction: row;
   margin: 0% 4.5%;
-  padding: 3% 1% 4% 1%;
+  padding: 3.5% 1% 3.5% 1%;
   justify-content: space-between;
   border: 2px;
   border-radius: 10px;
@@ -54,7 +54,7 @@ export const DropDownText = styled.View`
   text-align: center;
   flex-direction: row;
   margin: 0% 4.5%;
-  padding: 3% 1% 4% 1%;
+  padding: 3.5% 1% 3.5% 1%;
   justify-content: space-between;
   border: 2px;
   border-radius: 10px;
@@ -80,11 +80,11 @@ export const ButtonImages = styled.TouchableOpacity`
   border-radius: 5px;
   align-items: center;
   justify-content: center;
-  border: 3px;
-  padding: 4%;
+  border: 3px dashed #000000;
+  padding: 7%;
   border-radius: 10px;
-  margin: 0% -1% 1.5%;
-  background-color: #020083;
+  margin: 0% -0.5% 1.5%;
+  background-color: #fff;
 `;
 export const Remove = styled.TouchableOpacity`
   border-radius: 5px;
@@ -98,6 +98,11 @@ export const Remove = styled.TouchableOpacity`
 `;
 
 export const ButtonText = styled.Text`
+  color: black;
+  text-align: center;
+  font-size: 15px;
+`;
+export const ButtonTextSubmit = styled.Text`
   color: white;
   text-align: center;
   font-size: 15px;

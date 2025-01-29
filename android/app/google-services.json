@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "670820340972",
-    "project_id": "locationshop-a0d88",
-    "storage_bucket": "locationshop-a0d88.appspot.com"
+    "project_number": "9077677832",
+    "project_id": "auth-locationshop",
+    "storage_bucket": "auth-locationshop.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:670820340972:android:37ebe2ce79c225795181c9",
+        "mobilesdk_app_id": "1:9077677832:android:72f9227fbdb27b057196bd",
         "android_client_info": {
           "package_name": "com.locationshopfirstmobile"
         }
       },
       "oauth_client": [
         {
-          "client_id": "670820340972-9ij52o5sd2rcs7crcdpch79m8lb6d3m8.apps.googleusercontent.com",
+          "client_id": "9077677832-v4cvberadj9thtc5cffsjmilhns520sb.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.locationshopfirstmobile",
-            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+            "certificate_hash": "93cb7b047fd00e6420581c423be6c0259f12afb1"
           }
         },
         {
-          "client_id": "670820340972-qabul3ru603lu1kv8eits58qu842spc6.apps.googleusercontent.com",
+          "client_id": "9077677832-3pnso8dan0k16ltnoc8bl2s630bbvv7d.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD2QJu010WgHNYR92kLzcE4R_faAXuCgkA"
+          "current_key": "AIzaSyCbbRx_h_m-SE9WVa4XKNyceP4LBiCtaoI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "670820340972-qabul3ru603lu1kv8eits58qu842spc6.apps.googleusercontent.com",
+              "client_id": "9077677832-3pnso8dan0k16ltnoc8bl2s630bbvv7d.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -98,7 +98,6 @@ export default function SmartPhoneScreen() {
                   key={item.id || Math.random().toString()}
                   style={{marginBottom: 10}}>
                   <Image source={require('./img/smartphone_icon.png')} />
-                  <Text>{item.id}</Text>
                   <Text>{item.nameProduct}</Text>
                   <Text>{item.description}</Text>
                   <Text>{item.price}</Text>

@@ -21,6 +21,7 @@ export type StackTypes = StackNavigationProp<StackNavigation>;
 const AnnounceRouter = () => {
   return (
     <Stack.Navigator
+      initialRouteName="HomeScreen"
       screenOptions={{
         headerShown: true,
         headerTitleAlign: 'center',
@@ -34,6 +35,7 @@ const AnnounceRouter = () => {
       }}>
       <Stack.Screen
         name="HomeScreen"
+        component={HomeScreen}
         options={{
           title: '',
           headerTransparent: true,
@@ -41,7 +43,6 @@ const AnnounceRouter = () => {
             fontWeight: 'bold',
           },
         }}
-        component={HomeScreen}
       />
       <Stack.Screen
         name="Smartphones"
